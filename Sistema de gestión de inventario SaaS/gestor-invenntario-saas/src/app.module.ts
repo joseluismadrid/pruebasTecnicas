@@ -2,11 +2,13 @@ import { Module } from '@nestjs/common';
 import { createObserveModule } from '@nestjs/observe';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
-import { ProductModule } from './product/product.module';
-import { ConfigModule } from './config/config.module';
-import { DatabaseModule } from './database/database.module';
-import { CommonModule } from './common/common.module';
-import { ProductModule } from './product/product.module';
+import { ProductModule } from './modules/product/product.module.js';
+import { ConfigModule } from './config/config.module.js';
+import { DatabaseModule } from './database/database.module.js';
+import { CommonModule } from './common/common.module.js';
+import { MovementsModule } from './modules/movements/movements.module.js';
+import { MovementsController } from './modules/movements/movements.controller.js';
+import { MovementsService } from './modules/movements/movements.service.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -24,8 +26,9 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     ConfigModule,
     DatabaseModule,
     CommonModule,
+    MovementsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, MovementsController],
+  providers: [AppService, MovementsService],
 })
 export class AppModule {}
